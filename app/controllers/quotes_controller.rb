@@ -4,7 +4,7 @@ class QuotesController < ApplicationController
   
   URL = "https://quotes.toscrape.com"
 
-  before_action :authentificate
+  #before_action :authentificate
   before_action :set_quote, only: [:show, :update, :destroy]
   before_action :set_quotes, only: [:search_quotes]
 
@@ -47,7 +47,11 @@ class QuotesController < ApplicationController
 
   # Get /quotes/tag
   def search_quotes
-    render json: @quotes
+    if @quotes.empty?
+      render json: {status: "404", error: "tag not found"}, status: :not_found
+    else
+      render json: @quotes
+    end
   end
 
   private
