@@ -1,7 +1,10 @@
 class QuotesController < ApplicationController
 
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  
   URL = "https://quotes.toscrape.com"
 
+  before_action :authentificate
   before_action :set_quote, only: [:show, :update, :destroy]
   before_action :set_quotes, only: [:search_quotes]
 
@@ -119,4 +122,14 @@ class QuotesController < ApplicationController
     def quote_params
       ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
+
+
+    def authentificate
+      authenticate_or_request_with_http_token do  |token, options|
+        #hmac_secret = 'my$ecretK3y'
+        JWT.decode token, Auth::HMAC_SECRET, true, { algorithm: 'HS256' }
+      end
+    end
+
+
 end
