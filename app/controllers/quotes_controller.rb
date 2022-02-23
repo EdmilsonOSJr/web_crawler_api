@@ -4,7 +4,7 @@ class QuotesController < ApplicationController
   
   URL = "https://quotes.toscrape.com"
 
-  #before_action :authentificate
+  before_action :authentificate
   before_action :set_quote, only: [:show, :update, :destroy]
   before_action :set_quotes, only: [:search_quotes]
 
