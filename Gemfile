@@ -5,6 +5,8 @@ ruby '3.0.0'
 
 gem 'mongoid'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 gem 'pry-rails'
 
 gem 'nokogiri'

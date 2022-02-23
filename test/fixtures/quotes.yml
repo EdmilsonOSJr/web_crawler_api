@@ -2,10 +2,14 @@
 
 one:
   quote: MyString
+  tag: one
   author: MyString
   author_about: MyString
+  tags: 
 
 two:
   quote: MyString
+  tag: two
   author: MyString
   author_about: MyString
+  tags: 

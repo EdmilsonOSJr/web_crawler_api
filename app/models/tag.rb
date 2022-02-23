@@ -1,6 +1,7 @@
 class Tag
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :name, type: String
-  belongs_to :quote
+  field :name, type: Strin
+
+  has_many :quotes
 end
