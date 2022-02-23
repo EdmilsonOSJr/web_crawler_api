@@ -3,7 +3,9 @@
 Aplicação desenvolvida para vaga Backend na empresa Inovamind. Que realiza uma busca por frases no site [Quotes to Scrape](https://quotes.toscrape.com/) e as disponibiliza em uma API.
 
 ## Ferramentas utilizadas
-- Framework ruby on rails
+- Framework ruby on rails 
+  -   ruby versão 3.0.0p0 
+  -   rails versão 6.1.4.6
 - Database MongoDB
 
 
