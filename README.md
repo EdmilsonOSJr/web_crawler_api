@@ -18,10 +18,8 @@ Aplicação desenvolvida para vaga Backend na empresa Inovamind. Que realiza uma
 
 
 ## Funcionamento
-Inicialmenete é necessáiro baixar essa aplicação. Tendo ela em mãos utilize o seguinte comando para iniciá-la: 
-~~~rails
-rails s
-~~~
+Inicialmenete é necessáiro baixar essa aplicação. Tendo ela em mãos utilize o seguinte comando: 
+> rails s
 
 Como essa API é protegida por TOKEN é necessário que antes de qualquer coisa seja feita uma requisição **POST** para o link http://localhost:3000/auths. Informando no **BODY** a estrutura json:
 ~~~json
@@ -30,16 +28,26 @@ Como essa API é protegida por TOKEN é necessário que antes de qualquer coisa 
 }
 ~~~
 
-Será então retornado um token de acesso, usado na autenticação das requisições. Ele deve ser informado no **HEADER**, na key *Authorization*, de todas as requisições feitas na API.
+Será então retornado um token de acesso que deve ser usado na autenticação das requisições. Ele deve ser informado no **HEADER**, na key *Authorization*, precedido da palavra **Bearer** de todas as requisições feitas na API. Este token está configurado para expirar após 5 minutos de sua criação, após esse tempo será necessário gerar um novo.
 
-São disponibilizadas 2 tipos de requisições:
+São disponibilizadas 2 tipos de requisições, além da responsável pela autenticação:
 
-- **GET** que utiliza a url http://localhost:3000/quotes/{SEARCH_TAG}. Pode ser acessada por um navegador ou aplicativo para analise de requisições HTTP, onde SEARCH_TAG deve ser substituido por alguma *tag* de sua escolha, por exemplo books. Será feita uma pesquisa no site [Quotes to Scrape](https://quotes.toscrape.com/) procurando todas as *quotes*, frases, realcionadas à *tag* informada e retorná-las no formato *json* para o usuário.
+- **GET** que utiliza a url http://localhost:3000/quotes/{SEARCH_TAG}. Pode ser acessada por um navegador ou aplicativo para analise de requisições HTTP, onde SEARCH_TAG deve ser substituido por alguma *tag* de sua escolha. Primeiramente a *tag* informada será procurada no banco de dados, caso seja encontrada serão retornadas as frases já presente no memso banco. E caso não seja encontrada será feita uma pesquisa no site [Quotes to Scrape](https://quotes.toscrape.com/) procurando todas as *quotes*, frases, relacionadas à *tag* informada e retorná-las no formato *json* para o usuário, além de persisti-las no banco de dados para futuras requisições.
 
 - **GET** que utiliza a url http://localhost:3000/quotes. Pode ser acessada por um navegador ou aplicativo para analise de requisições HTTP, sendo retornadas todas as *quotes* disponíveis no banco de dados.
 
 
 ## Retornos
+
+Retorno de uma requisição de autenticação:
+
+~~~json
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSnVuaW9yIn0.ajhaDGYwlJXfDfN1WeRXExRRiqQRlqFuid5imQWOwOK"
+}
+~~~
+
+
 
 Caso a aplicação tenha sucesso em encontrar uma ou mais *quotes* relacioandas à *tag* pesquisada, ela retornará um json de acordo com a seguinte estrutura:
 
