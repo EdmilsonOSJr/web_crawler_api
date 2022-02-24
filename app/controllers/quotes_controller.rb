@@ -83,12 +83,12 @@ class QuotesController < ApplicationController
         tag = search_tag
         @quotes = Quote.where(tag: tag).to_a
       rescue
-        @quotes = screpe_quote
+        @quotes = scrape_quote
       end
     
     end
 
-    def screpe_quote
+    def scrape_quote
 
       require 'nokogiri'
       require 'open-uri'
