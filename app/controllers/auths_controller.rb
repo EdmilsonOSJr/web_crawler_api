@@ -1,5 +1,6 @@
 class AuthsController < ApplicationController
 
+    # Cria um token de acesso 
     def create 
 
         # The secret must be a string. A JWT::DecodeError will be raised if it isn't provided.

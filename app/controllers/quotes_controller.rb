@@ -60,21 +60,25 @@ class QuotesController < ApplicationController
       @quote = Quote.find(params[:id])
     end
 
+    # Verifica se a tag existe no banco de dados
     def search_tag
       tag = Tag.find_by(name: params[:tag])
     end
 
+    # Adiciona uma nova tag ao banco de dados
     def set_new_tag
       Tag.create!(
         name: params[:tag]
       )
     end
 
+    # Recupera as tags relacionas à frase
     def get_related_tags(quote, tags_array)
       quote.search('.tag').each do |tag|
         tags_array.push(tag.text)
       end
     end
+
 
 
     def set_quotes
@@ -88,6 +92,8 @@ class QuotesController < ApplicationController
     
     end
 
+
+    # Recupera as frases de uma respectiva tag do site Quotes to Scrape
     def scrape_quote
 
       require 'nokogiri'
@@ -127,7 +133,7 @@ class QuotesController < ApplicationController
       ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 
-
+    # Realiza a autenticação das requisições
     def authentificate
       authenticate_or_request_with_http_token do  |token, options|
         #hmac_secret = 'my$ecretK3y'
